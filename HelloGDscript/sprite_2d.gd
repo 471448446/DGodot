@@ -6,6 +6,7 @@ extends Sprite2D
 var speed = 400
 var angle_speed = PI
 
+# 这个类被创建的时候
 func _init():
 	print("Hello,World")
 
@@ -17,8 +18,32 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Godot将在每一帧调用该函数，并传递给它一个名为 delta 的参数，即从上一帧开始经过的时间
 func _process(delta):
+	#test1(delta)
+	test2(delta)
+	
+# 尝试建议输入事件
+func test2(delta:float):
+	#总之，Godot中的每个脚本都代表一个类，并扩展了引擎的一个内置类。
+	#在我们sprite的例子中，你的类所继承的节点类型可以让你访问一些属性，如 rotation 和 position 。你还继承了许多函数，但我们在这个例子中没有使用这些函数
+	var direction = 0
+	if Input.is_action_pressed("ui_left"):
+		direction = -1
+	if Input.is_action_pressed("ui_right"):
+		direction = 1
+	rotation += angle_speed * direction * delta
+	var velocity = Vector2.ZERO
+	if Input.is_action_pressed("ui_up"):
+		velocity = Vector2.UP.rotated(rotation) * speed
+	if Input.is_action_pressed("ui_down"):
+		velocity = -Vector2.UP.rotated(rotation) * speed
+	position += velocity * delta
+
+func test1(delta:float):
+	# 基本上是一直的 60帧
+	#print(delta)
 	# 旋转 rotation 是2D图形的一个属性
 	rotation += angle_speed*delta
 	# 移动
 	var velocity = Vector2.UP.rotated(rotation) * speed
 	position += velocity * delta
+	
