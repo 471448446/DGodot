@@ -10,13 +10,11 @@ config_version=5
 
 [application]
 
-config/name="HelloWorld"
-run/main_scene="res://label.tscn"
+config/name="HelloGDscript"
+run/main_scene="res://sprite_2d.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
 [rendering]
 
 renderer/rendering_method="mobile"
-textures/vram_compression/import_s3tc_bptc=true
-textures/vram_compression/import_etc2_astc=true
