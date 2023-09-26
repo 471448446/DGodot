@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkiis44hpgtvn"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_dwobq"]
+[ext_resource type="FontFile" uid="uid://cijyjm4j0n23n" path="res://fonts/Xolonium-Regular.ttf" id="2_2s66s"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_dwobq")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
+offset_bottom = 81.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_2s66s")
+theme_override_font_sizes/font_size = 64
+text = "0"
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -135.0
+offset_top = -176.0
+offset_right = 135.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_2s66s")
+theme_override_font_sizes/font_size = 64
+text = "躲避小兵"
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 161.0
+offset_top = 480.0
+offset_right = 361.0
+offset_bottom = 580.0
+theme_override_fonts/font = ExtResource("2_2s66s")
+theme_override_font_sizes/font_size = 64
+text = "开始
+"
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]
