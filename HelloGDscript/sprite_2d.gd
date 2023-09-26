@@ -12,14 +12,28 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	#pass # Replace with function body.
+	# https://ask.godotengine.org/130426/how-do-i-make-a-simple-timer
+	var timer = get_node("MyTimer")
+	print(timer)
+	timer.connect("timeout",Callable(self,"_on_timer_timeout"),CONNECT_DEFERRED)	
+	#timer.timeout.connect(_on_timer_timeout)
 
+func _on_timer_timeout():
+	visible = not visible
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Godot将在每一帧调用该函数，并传递给它一个名为 delta 的参数，即从上一帧开始经过的时间
 func _process(delta):
 	#test1(delta)
-	test2(delta)
+	#test2(delta)
+	test3(delta)
+
+func test3(delta:float):
+	# 按钮按下的时候，修改位置
+	rotation += angle_speed*delta
+	var velocity = Vector2.UP.rotated(rotation) * speed
+	position += velocity * delta
 	
 # 尝试建议输入事件
 func test2(delta:float):
@@ -47,3 +61,8 @@ func test1(delta:float):
 	var velocity = Vector2.UP.rotated(rotation) * speed
 	position += velocity * delta
 	
+
+func _on_button_pressed():
+	# 此函数将切换处理，进而切换按下按钮时图标的移动。
+	# 启用或警用帧刷新
+	set_process(not is_processing())
